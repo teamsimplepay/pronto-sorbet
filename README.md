@@ -1,4 +1,6 @@
-# Pronto runner for Brakeman
+# Pronto runner for Sorbet
+
+[![Gem Version](https://badge.fury.io/rb/pronto-sorbet.png)](https://badge.fury.io/rb/pronto-sorbet)
 
 Pronto runner for [Sorbet](https://sorbet.org/), a static type checker for [Ruby](https://www.ruby-lang.org/). [What is Pronto?](https://github.com/prontolabs/pronto)
 
