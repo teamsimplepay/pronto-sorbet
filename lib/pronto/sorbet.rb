@@ -18,11 +18,14 @@ module Pronto
         Dir.chdir(repo_path) do
           output, _ = Open3.capture2e(sorbet_executable, 'tc')
 
-          output.split("\n")[0..-2].slice_after { |l| l.strip.empty? }.map do |lines|
-            filename, line, message = lines.first.split(':', 3)
+          output.split("\n")[0..-2].slice_before do |line|
+            ![nil, ' '].include?(line[0])
+          end.map do |lines|
+            filename, line, message = lines.first&.split(':', 3)
+            next if line.nil? || message.nil?
             { filename: filename, line: line.to_i, message: message.lstrip,
               details: lines[1..-1].join("\n").rstrip }
-          end
+          end.compact
         end
       rescue SystemCallError
         []
